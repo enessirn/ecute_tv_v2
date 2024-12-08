@@ -7,10 +7,10 @@ function Header() {
         Ecute.TV <span className="text-sm text-red-800">V2</span>
       </div>
       <div className="flex gap-4 flex-row select-none">
-        <button className="px-4 py-1 text-[#a5a59e] md:py-2 md:px-8 text-base md:text-lg cursor-pointer outline-none border-none bg-transparent rounded-[40px] font-normal">
+        <button className="px-4 py-1 bg-[#383838] text-white md:py-2 md:px-8 text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal">
           Series
         </button>
-        <button className="px-4 py-1 bg-[#383838] text-white md:py-2 md:px-8 text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal">
+        <button className="px-4 py-1  md:py-2 md:px-8 text-[#a5a59e] text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal">
           Movies
         </button>
       </div>

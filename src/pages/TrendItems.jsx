@@ -4,10 +4,10 @@ import Trend from "../components/TrendItems/Trend";
 
 function TrendItems() {
   return (
-    <div>
+    <>
       <Header />
       <Trend />
-    </div>
+    </>
   );
 }
 
