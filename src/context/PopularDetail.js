@@ -10,7 +10,7 @@ export function PopularDetailProvider({ children }) {
   const API_KEY = process.env.REACT_APP_OMBDB_KEY;
   const [data, setData] = useState(undefined);
   const [loaded, setLoaded] = useState(false);
-  const [heading, setHeading] = useState(undefined);
+  const [heading, setHeading] = useState('');
 
   useEffect(() => {
     if (result.length > 0 && loading && heading !== null) {
@@ -19,9 +19,6 @@ export function PopularDetailProvider({ children }) {
       console.info("HEADINGGGGGGGGGGGGGGGGGGGGG", heading&& heading);
     }
   }, [result, type, loading]);
-  useEffect(() => {
-    console.log(heading && heading, "HEADING");
-  }, [heading]);
   useEffect(() => {
     const getPopularDetail = async () => {
       try {
