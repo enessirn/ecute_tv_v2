@@ -19,7 +19,7 @@ export function PopularListProvider({ children }) {
   useEffect(() => {
     const getPopularList = async () => {
       try {
-        if (type !== undefined || type !== '' || type !== null) {
+        if (type !== undefined || type !== "" || type !== null) {
           const getResult = await axios.get(
             `https://api.themoviedb.org/3/trending/${
               type ? "tv" : "movie"
@@ -29,10 +29,8 @@ export function PopularListProvider({ children }) {
 
           setLoading(true);
           setResult(getResult.data.results.slice(0, 5));
-                  console.log(result);
+          console.log(result);
         }
-
-
       } catch (error) {
         console.error(error);
       } finally {
