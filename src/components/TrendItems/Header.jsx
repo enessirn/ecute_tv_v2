@@ -1,36 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import PopularListContext from "../../context/PopularList";
 
 function Header() {
+  const {type, setType} = useContext(PopularListContext);
   return (
     <nav className="w-full h-20 flex items-center justify-between px-5 bg-black/45 absolute top-0 left-0 z-50 shadow-[0_35px_40px_15px_rgba(0,0,0,0.45)]">
       <div className="logo text-2xl md:text-4xl flex items-end font-extrabold text-primary select-none ">
-        Ecute.TV <span className="text-sm text-red-800">V2</span>
+        Ecute.TV <span className="text-sm animate-pulse text-red-800">V2</span>
       </div>
       <div className="flex gap-4 flex-row select-none">
-        <button className="px-4 py-1 bg-[#383838] text-white md:py-2 md:px-8 text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal">
+        <button className={`${type ? 'bg-[#383838] text-white' : 'text-[#a5a59e]'} px-4 py-1 md:py-2 md:px-8 text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal`} onClick={() => setType(true)}>
           Series
         </button>
-        <button className="px-4 py-1  md:py-2 md:px-8 text-[#a5a59e] text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal">
+        <button className={`${type ? 'text-[#a5a59e]' : 'bg-[#383838] text-white'} px-4 py-1 md:py-2 md:px-8  text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal`} onClick={() => setType(false)}>
           Movies
         </button>
       </div>
-      <div className="flex flex-row gap-6">
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-5 md:size-6 text-[#a5a59e] cursor-pointer"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-            />
-          </svg>
-        </span>
+      <div>
         <span className="flex flex-row">
           <svg
             xmlns="http://www.w3.org/2000/svg"

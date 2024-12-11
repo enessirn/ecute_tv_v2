@@ -3,7 +3,7 @@ import React from "react";
 function ButtonGroup() {
   return (
     <div className="flex flex-row gap-2">
-      <button className="flex flex-row items-center text-sm bg-[#383838] px-6 py-3 md:px-12 md:py-6 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#4b4b4b] hover:fill-red-700">
+      <button className="flex flex-row items-center text-sm bg-[#383838] px-3 py-3 min-[1300px]:px-12 min-[1300px]:py-6 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#4b4b4b">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
