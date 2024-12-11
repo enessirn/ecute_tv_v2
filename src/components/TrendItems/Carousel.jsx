@@ -23,10 +23,10 @@ function Carousel() {
               key={index}
               src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
               className="rounded-xl shadow-md w-[50%] min-[1300px]:w-[100%] h-24 object-cover brightness-50 hover:brightness-100 transition-all cursor-pointer"
-              alt={`${type ? item.name : item.title}`}
+              alt={`${type ? item && item.name : item && item.title}`}
               tabIndex = {index}
               onClick={(e) => {
-                setHeading(e.target.alt);
+                setHeading((item?.name || item?.title) || e.target.alt);
                 setDataIndex(e.target.tabIndex);
                 
               }}

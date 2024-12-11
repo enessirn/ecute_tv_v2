@@ -6,7 +6,7 @@ export function PopularListProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState([]);
   const [type, setType] = useState(true);
-  const [dataIndex, setDataIndex] = useState(null)
+  const [dataIndex, setDataIndex] = useState(0);
 
   const options = {
     method: "GET",
@@ -19,15 +19,19 @@ export function PopularListProvider({ children }) {
   useEffect(() => {
     const getPopularList = async () => {
       try {
-        const getResult = await axios.get(
-          `https://api.themoviedb.org/3/trending/${
-            type ? "tv" : "movie"
-          }/week?language=en-US`,
-          options
-        );
-        setLoading(true);
-        setResult(getResult.data.results.slice(0, 5));
-        console.log(result)
+        if (type !== undefined || type !== '' || type !== null) {
+          const getResult = await axios.get(
+            `https://api.themoviedb.org/3/trending/${
+              type ? "tv" : "movie"
+            }/week?language=en-US`,
+            options
+          );
+
+          setLoading(true);
+          setResult(getResult.data.results.slice(0, 5));
+                  console.log(result);
+        }
+
 
       } catch (error) {
         console.error(error);
@@ -38,18 +42,13 @@ export function PopularListProvider({ children }) {
     getPopularList();
   }, [loading, type]);
 
-  useEffect(() => {
-    if (loading === true) {
-      setDataIndex(0)
-    }
-  },[loading])
   let value = {
     loading,
     result,
     type,
     setType,
     setDataIndex,
-    dataIndex
+    dataIndex,
   };
 
   return (

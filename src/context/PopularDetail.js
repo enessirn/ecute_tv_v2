@@ -8,26 +8,32 @@ export function PopularDetailProvider({ children }) {
   const { loading, result, type } = useContext(PopularListContext);
   const API_URL = process.env.REACT_APP_OMDB_URL;
   const API_KEY = process.env.REACT_APP_OMBDB_KEY;
-  const [data, setData] = useState();
+  const [data, setData] = useState(undefined);
   const [loaded, setLoaded] = useState(false);
-  const [heading, setHeading] = useState();
-
+  const [heading, setHeading] = useState(undefined);
 
   useEffect(() => {
-    if (result.length > 0 && loading === true && result !== null | result !== undefined) {
-      setHeading(type ? result && result[0].name : result && result[0].title);
+    if (result.length > 0 && loading && heading !== null) {
+      console.log(type, "TYPEEEEEEEEE");
+      setHeading(type ? result[0]?.name : result[0]?.title);
+      console.info("HEADINGGGGGGGGGGGGGGGGGGGGG", heading&& heading);
     }
-  },[result,type,loading])
+  }, [result, type, loading]);
+  useEffect(() => {
+    console.log(heading && heading, "HEADING");
+  }, [heading]);
   useEffect(() => {
     const getPopularDetail = async () => {
       try {
-        if (loading === true && result.length > 0 && heading !== null) {
+        if (loading === true && result.length > 0) {
           const getResult = await axios.get(
-            `${API_URL}${API_KEY}t=${heading}&r=json`
+            `${API_URL}${API_KEY}t=${heading && heading}&r=json`
           );
+          if (heading) {
+            setData(getResult && getResult.data && getResult.data);
+            setLoaded(true);
+          }
 
-          setData(getResult.data); 
-          setLoaded(true);  
         }
       } catch (error) {
         console.log(error);
@@ -35,18 +41,18 @@ export function PopularDetailProvider({ children }) {
     };
 
     getPopularDetail();
-  }, [heading]); 
+  }, [heading]);
 
   useEffect(() => {
     if (data) {
-      console.log(data); 
+      console.log(data);
     }
-  }, [data,loaded]); 
+  }, [data, loaded]);
 
   let value = {
     data,
     heading,
-    setHeading
+    setHeading,
   };
 
   return (
