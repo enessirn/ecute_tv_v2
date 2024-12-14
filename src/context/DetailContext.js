@@ -1,11 +1,13 @@
-import React, { createContext, use, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import PopularDetailContext from "./PopularDetail";
 import axios from "axios";
+import PopularListContext from "./PopularList";
 const DetailContext = createContext();
 
 export function DetailProvider({ children }) {
   const [close, setClose] = useState(true);
   const { heading } = useContext(PopularDetailContext);
+  const {type} = useContext(PopularListContext)
   const [videoID, setVideoID] = useState(null);
   const [desc,setDesc] = useState(undefined);
   const [load,setLoad] = useState(false)
@@ -14,7 +16,7 @@ export function DetailProvider({ children }) {
 
   const options = {
     method: "GET",
-    url: `https://youtube-data-api6.p.rapidapi.com/${heading && heading}`,
+    url: `https://youtube-data-api6.p.rapidapi.com/${heading && heading}+official+trailer+watch`,
     headers: {
       "X-RapidAPI-Key": `${process.env.REACT_APP_YOUTUBE_KEY}`,
       "X-RapidAPI-Host": `${process.env.REACT_APP_YOUTUBE_HOST}`,
@@ -31,8 +33,7 @@ export function DetailProvider({ children }) {
       }
     };
     getResult();
-    console.log(heading)
-  }, [heading]);
+  }, [heading,type]);
 
   useEffect(() => {
     if (videoID) {
@@ -60,10 +61,6 @@ export function DetailProvider({ children }) {
 
     getPopularDetail();
   }, [heading]);
-
-  useEffect(() => {
-    console.log(desc)
-  },[load,heading])
   const values = { setClose, close,videoID,desc,load };
   return (
     <DetailContext.Provider value={values}>{children}</DetailContext.Provider>

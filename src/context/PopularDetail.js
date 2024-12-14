@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import React,{ createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import PopularListContext from "./PopularList";
 
@@ -10,13 +10,11 @@ export function PopularDetailProvider({ children }) {
   const API_KEY = process.env.REACT_APP_OMBDB_KEY;
   const [data, setData] = useState(undefined);
   const [loaded, setLoaded] = useState(false);
-  const [heading, setHeading] = useState('');
+  const [heading, setHeading] = useState(undefined);
 
   useEffect(() => {
     if (result.length > 0 && loading && heading !== null) {
-      console.log(type, "TYPEEEEEEEEE");
       setHeading(type ? result[0]?.name : result[0]?.title);
-      console.info("HEADINGGGGGGGGGGGGGGGGGGGGG", heading&& heading);
     }
   }, [result, type, loading]);
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 const PopularListContext = createContext();
 
@@ -21,9 +21,9 @@ export function PopularListProvider({ children }) {
       try {
         if (type !== undefined || type !== "" || type !== null) {
           const getResult = await axios.get(
-            `https://api.themoviedb.org/3/trending/${
+            `https://api.themoviedb.org/3/${
               type ? "tv" : "movie"
-            }/week?language=en-US`,
+            }/top_rated?language=en-US&page=1`,
             options
           );
 
