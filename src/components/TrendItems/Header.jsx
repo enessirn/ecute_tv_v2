@@ -2,10 +2,14 @@ import React, { use, useContext, useEffect, useState } from "react";
 import PopularListContext from "../../context/PopularList";
 import "./header.css";
 import LocalStorageContext from "../../context/LocalStorage";
+import PopularDetailContext from "../../context/PopularDetail";
+import DetailContext from "../../context/DetailContext";
 function Header() {
   const { type, setType } = useContext(PopularListContext);
   const [open, setOpen] = useState(false);
-  const { localItems,setLocalItems} = useContext(LocalStorageContext);
+  const { localItems, setLocalItems } = useContext(LocalStorageContext);
+  const { setHeading } = useContext(PopularDetailContext);
+  const { setClose } = useContext(DetailContext);
 
   return (
     <nav className="w-full h-20 flex items-center justify-between px-5 bg-black/45 absolute top-0 left-0 z-50 shadow-[0_35px_40px_15px_rgba(0,0,0,0.45)]">
@@ -81,13 +85,17 @@ function Header() {
               <div
                 key={i}
                 className="flex flex-row border-b-2 justify-between gap-4 items-center py-2 cursor-pointer hover:bg-red-700 w-full rounded-lg px-2 "
+                onClick={() => {
+                  setHeading(item.title);
+                  setClose(false);
+                }}
               >
                 <img
-                  className="w-14 h-14 rounded-full object-center"
+                  className="w-14 h-14 rounded-full object-center select-none pointer-events-none"
                   src={`${item && item.img}`}
                   alt={`${item && item.title}`}
                 />
-                <span className="select-none overflow-hidden text-sm text-center">
+                <span className="select-none overflow-hidden text-sm text-center pointer-events-none">
                   {item && item.title}
                 </span>
                 <svg
@@ -97,7 +105,13 @@ function Header() {
                   strokeWidth={1.5}
                   stroke="currentColor"
                   className="size-6 min-w-[1.5rem]"
-                  onClick={() => setLocalItems(localItems.filter((element) => element.title !== item.title))}
+                  onClick={() =>
+                    setLocalItems(
+                      localItems.filter(
+                        (element) => element.title !== item.title
+                      )
+                    )
+                  }
                 >
                   <path
                     strokeLinecap="round"

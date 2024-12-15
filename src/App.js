@@ -20,15 +20,15 @@ function App() {
   
   
 
-  useEffect(() => {
-    console.log(close,"close değeri")
-    if (close === true) {
-      setTimeout(() => {
-        window.scrollTo(0,scrollValue);
-      }, 500);
+  // useEffect(() => {
+  //   console.log(close,"close değeri")
+  //   if (close === true) {
+  //     setTimeout(() => {
+  //       window.scrollTo(0,scrollValue);
+  //     }, 500);
 
-    }
-  },[close])
+  //   }
+  // },[close])
 
   return (
     <div className="main font-poppins scroll-smooth">

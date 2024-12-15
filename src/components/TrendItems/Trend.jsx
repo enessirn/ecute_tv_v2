@@ -1,15 +1,17 @@
 import ButtonGroup from "./ButtonGroup";
 import Carousel from "./Carousel";
 import PopularListContext from "../../context/PopularList";
-import React,{ useContext, useEffect } from "react";
+import React,{ useContext } from "react";
 import PopularDetailContext from "../../context/PopularDetail";
 function Trend() {
   const IMAGE_URL = "https://image.tmdb.org/t/p/original";
   const { result,loading,dataIndex,type } = useContext(PopularListContext);
+
   const {data} = useContext(PopularDetailContext);
   const ScrooltoDown = () => {
     window.scrollBy(0, 300);
   }
+
   return (
     <div
       className={`select-none pt-20 w-full h-screen bg-slate-600 relative overflow-hidden !bg-no-repeat !bg-cover !bg-center`}
@@ -41,7 +43,7 @@ function Trend() {
           <img
             src={`${IMAGE_URL}${result && result[dataIndex]?.poster_path}`}
             alt="poster-img"
-            className="rounded-2xl shadow-md md:w-[600px]"
+            className="pointer-events-none rounded-2xl shadow-md md:w-[600px]"
           />
         </div>
         <div className="second-side flex flex-col gap-2 items-center md:items-start md:gap-3 text-lg md:text-[30px] px-4 lg:pl-24 w-full">

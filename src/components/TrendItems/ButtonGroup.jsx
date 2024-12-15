@@ -1,17 +1,45 @@
 import React, { useContext } from "react";
 import DetailContext from "../../context/DetailContext";
+import PopularDetailContext from "../../context/PopularDetail";
+import PopularListContext from "../../context/PopularList";
+import LocalStorageContext from "../../context/LocalStorage"
 function ButtonGroup() {
   const {setClose} = useContext(DetailContext);
+  const IMAGE_URL = "https://image.tmdb.org/t/p/original";
+  const { result,dataIndex,type } = useContext(PopularListContext);
+  const { setLocalItems, localItems } = useContext(LocalStorageContext);
+  const addFavorite = () => {
+    const findData = localItems.find(el => {
+      if (type) {
+        return el.title === result[dataIndex].name
+      }
+      else {
+        return el.title === result[dataIndex].title
+      }
+    });
+    console.log(findData,"findatatata ")
+    if (!findData) {
+     setLocalItems([
+       ...localItems,
+       {
+         id: Number(localItems.length),
+         img: `${IMAGE_URL}${result && result[dataIndex]?.poster_path}`,
+         title: `${result && type ? result[dataIndex]?.name : result[dataIndex]?.title}`,
+       },
+     ]);
+    }
+ 
+   };
   return (
     <div className="flex flex-row gap-2">
-      <button className="flex flex-row items-center text-sm bg-[#383838] px-3 py-3 min-[1300px]:px-12 min-[1300px]:py-6 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#4b4b4b">
+      <button className="flex flex-row items-center text-sm bg-[#383838] px-3 py-3 min-[1300px]:px-12 min-[1300px]:py-6 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#4b4b4b" onClick={addFavorite}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-6"
+          className="size-6 pointer-events-none"
         >
           <path
             strokeLinecap="round"
