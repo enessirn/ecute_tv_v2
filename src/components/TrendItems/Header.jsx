@@ -1,18 +1,32 @@
-import React, { useContext } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import PopularListContext from "../../context/PopularList";
-
+import "./header.css";
+import LocalStorageContext from "../../context/LocalStorage";
 function Header() {
-  const {type, setType} = useContext(PopularListContext);
+  const { type, setType } = useContext(PopularListContext);
+  const [open, setOpen] = useState(false);
+  const { localItems,setLocalItems} = useContext(LocalStorageContext);
+
   return (
     <nav className="w-full h-20 flex items-center justify-between px-5 bg-black/45 absolute top-0 left-0 z-50 shadow-[0_35px_40px_15px_rgba(0,0,0,0.45)]">
       <div className="logo text-2xl md:text-4xl flex items-end font-extrabold text-primary select-none ">
         Ecute.TV <span className="text-sm animate-pulse text-red-800">V2</span>
       </div>
       <div className="flex gap-4 flex-row select-none">
-        <button className={`${type ? 'bg-[#383838] text-white' : 'text-[#a5a59e]'} px-4 py-1 md:py-2 md:px-8 text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal`} onClick={() => setType(true)}>
+        <button
+          className={`${
+            type ? "bg-[#383838] text-white" : "text-[#a5a59e]"
+          } px-4 py-1 md:py-2 md:px-8 text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal`}
+          onClick={() => setType(true)}
+        >
           Series
         </button>
-        <button className={`${type ? 'text-[#a5a59e]' : 'bg-[#383838] text-white'} px-4 py-1 md:py-2 md:px-8  text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal`} onClick={() => setType(false)}>
+        <button
+          className={`${
+            type ? "text-[#a5a59e]" : "bg-[#383838] text-white"
+          } px-4 py-1 md:py-2 md:px-8  text-base md:text-lg cursor-pointer outline-none border-none rounded-[40px] font-normal`}
+          onClick={() => setType(false)}
+        >
           Movies
         </button>
       </div>
@@ -24,7 +38,8 @@ function Header() {
             strokeWidth={1.5}
             stroke="#a5a59e"
             fill="currentColor"
-            className="size-5 md:size-6 text-transparent hover:text-primary hover:stroke-none cursor-pointer transition-all"
+            className="size-5 md:size-6 text-transparent hover:text-primary hover:stroke-none cursor-pointer transition-all "
+            onClick={() => setOpen(!open)}
           >
             <path
               strokeLinecap="round"
@@ -33,6 +48,69 @@ function Header() {
             />
           </svg>
         </span>
+      </div>
+      <div
+        className={`close-tab ${
+          open ? "block" : "hidden"
+        } absolute z-50 right-28 top-[22rem] bg-red-900 p-3 rounded-full cursor-pointer hover:bg-red-800 hover:shadow-red-800 shadow-2xl border-2 border-white shadow-white select-none`}
+        onClick={() => setOpen(false)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="white"
+          className="size-8 pointer-events-none "
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 18 18 6M6 6l12 12"
+          />
+        </svg>
+      </div>
+      <div
+        className={`absolute right-5 z-40 text-white bg-red-600/45 w-60 h-80 top-14 rounded-lg ${
+          open ? "!flex" : "!hidden"
+        } flex-col overflow-auto custom-scrollbar`}
+      >
+        {localItems.length !== 0 ? (
+          localItems.map((item, i) => {
+            return (
+              <div
+                key={i}
+                className="flex flex-row border-b-2 justify-between gap-4 items-center py-2 cursor-pointer hover:bg-red-700 w-full rounded-lg px-2 "
+              >
+                <img
+                  className="w-14 h-14 rounded-full object-center"
+                  src={`${item && item.img}`}
+                  alt={`${item && item.title}`}
+                />
+                <span className="select-none overflow-hidden text-sm text-center">
+                  {item && item.title}
+                </span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6 min-w-[1.5rem]"
+                  onClick={() => setLocalItems(localItems.filter((element) => element.title !== item.title))}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                  />
+                </svg>
+              </div>
+            );
+          })
+        ) : (
+          <p className="text-center p-4">Come on add any somethings</p>
+        )}
       </div>
     </nav>
   );

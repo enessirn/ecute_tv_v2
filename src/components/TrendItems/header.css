@@ -1,0 +1,19 @@
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 4px;
+    background: black;
+    border-radius: 40px;
+
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #f87171;
+    height: 4px;
+    border-radius: 40px;
+    transition: all 1s ease-in-out;
+    cursor: pointer;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #b91c1c;
+    border-radius: 40px;
+    transition: all 1s ease-in-out;
+}

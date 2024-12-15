@@ -1,4 +1,4 @@
-import React, { createRef, useContext } from "react";
+import React, { createRef, useContext, useState } from "react";
 import YouTubeIframe from "./YouTubeIframe";
 import DetailContext from "../../context/DetailContext";
 import PopularListContext from "../../context/PopularList";
@@ -46,10 +46,16 @@ function Detail() {
                 </span>
                 <button
                   className="flex flex-row border border-white items-center justify-center text-sm w-[30px] h-[30px] min-[1300px]:text-base min-[1300px]:w-[50px] min-[1300px]:h-[50px] rounded-full"
-                  onClick={() => setLocalItems([...localItems,{
-                    img: `${desc && desc.Poster}`,
-                    title: localTitle.current.textContent
-                  }])}
+                  onClick={() => {
+                    setLocalItems([
+                      ...localItems,
+                      {
+                        id: Number(localItems.length),
+                        img: `${desc && desc.Poster}`,
+                        title: localTitle.current.textContent,
+                      },
+                    ]);
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -14,9 +14,9 @@ function App() {
     window.addEventListener("scroll",handleScroll);
     
   },[])
-  useEffect(() => {
-    console.log(scrollValue)
-  },[scrollValue])
+  // useEffect(() => {
+  //   console.log(scrollValue)
+  // },[scrollValue])
   
   
 
