@@ -130,7 +130,7 @@ function Header() {
             );
           })
         ) : (
-          <p className="text-center p-4">Come on add any somethings</p>
+          <p className="text-center p-4">add any somethings</p>
         )}
       </div>
     </nav>

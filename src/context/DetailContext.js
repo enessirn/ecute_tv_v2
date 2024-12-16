@@ -27,7 +27,6 @@ export function DetailProvider({ children }) {
           }
         });
         setVideoID(getData && getData.data.items[0]?.id.videoId)
-        console.log(getData && getData.data.items[0]?.id.videoId, "getDAtaatatata");
       } catch (error) {
         console.error("Error fetching data:", error);
       }

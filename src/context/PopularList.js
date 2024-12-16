@@ -29,12 +29,9 @@ export function PopularListProvider({ children }) {
 
           setLoading(true);
           setResult(getResult.data.results.slice(0, 5));
-          console.log(result);
         }
       } catch (error) {
         console.error(error);
-      } finally {
-        console.log("Api loaded");
       }
     };
     getPopularList();

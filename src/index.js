@@ -6,6 +6,7 @@ import { DetailProvider } from "./context/DetailContext";
 import { PopularDetailProvider } from "./context/PopularDetail";
 import { PopularListProvider } from "./context/PopularList";
 import { LocalStorageProvider } from "./context/LocalStorage";
+import { CategoryProvider } from "./context/CategoryContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -14,7 +15,9 @@ root.render(
     <PopularDetailProvider>
       <DetailProvider>
         <LocalStorageProvider>
-          <App />
+          <CategoryProvider>
+            <App />
+          </CategoryProvider>
         </LocalStorageProvider>
       </DetailProvider>
     </PopularDetailProvider>

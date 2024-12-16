@@ -3,6 +3,7 @@ import TrendItems from "./pages/TrendItems";
 import Detail from "./components/Details/Detail";
 import DetailContext from "./context/DetailContext";
 import List from "./pages/List";
+import Categories from "./pages/Categories";
 function App() {
   const { close } = useContext(DetailContext);
   const [scrollValue,setScrollValue] = useState();
@@ -35,6 +36,7 @@ function App() {
       <TrendItems />
       {close ? <List /> : null}
       {close ? null : <Detail />}
+      {close ? <Categories /> : null}
     </div>
   );
 }

@@ -38,12 +38,6 @@ export function PopularDetailProvider({ children }) {
     getPopularDetail();
   }, [heading]);
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-    }
-  }, [data, loaded]);
-
   let value = {
     data,
     heading,
