@@ -13,7 +13,7 @@ function Header() {
 
   return (
     <nav className="w-full h-20 flex items-center justify-between px-5 bg-black/45 absolute top-0 left-0 z-50 shadow-[0_35px_40px_15px_rgba(0,0,0,0.45)]">
-      <div className="logo text-2xl md:text-4xl flex items-end font-extrabold text-primary select-none ">
+      <div className="cursor-pointer logo text-2xl md:text-4xl flex items-end font-extrabold text-primary select-none " onClick={() => window.open('https://www.linkedin.com/in/enessirn/','_blank')}>
         Ecute.TV <span className="text-sm animate-pulse text-red-800">V2</span>
       </div>
       <div className="flex gap-4 flex-row select-none">

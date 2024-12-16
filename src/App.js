@@ -4,6 +4,7 @@ import Detail from "./components/Details/Detail";
 import DetailContext from "./context/DetailContext";
 import List from "./pages/List";
 import Categories from "./pages/Categories";
+import Footer from "./pages/Footer";
 function App() {
   const { close } = useContext(DetailContext);
   const [scrollValue,setScrollValue] = useState();
@@ -32,11 +33,12 @@ function App() {
   // },[close])
 
   return (
-    <div className="main font-poppins scroll-smooth">
+    <div className="main font-poppins scroll-smooth bg-black">
       <TrendItems />
       {close ? <List /> : null}
       {close ? null : <Detail />}
       {close ? <Categories /> : null}
+      {close ? <Footer /> : null}
     </div>
   );
 }
