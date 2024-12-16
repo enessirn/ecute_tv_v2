@@ -6,13 +6,13 @@ const CategoryContext = createContext();
 
 export function CategoryProvider({ children }) {
   const TMDB_BASE_URL = "https://api.themoviedb.org/3";
-  const TMDB_GENRE_LIST = "/discover/movie?with_genres=18&primary_release_year=2014";
   const { type } = useContext(PopularListContext);
   const [categoryList, setCategoryList] = useState();
-  const [categoryId,setCategoryId] = useState(`${type ? 10759 : 28}`)
+  const [categoryId, setCategoryId] = useState(`${type ? 10759 : 28}`);
+  const [categoryContent, setCategoryContent] = useState(null);
   useEffect(() => {
-    setCategoryId(`${type ? 10759 : 28}`)
-  },[type])
+    setCategoryId(`${type ? 10759 : 28}`);
+  }, [type]);
   const options = {
     method: "GET",
     headers: {
@@ -37,7 +37,30 @@ export function CategoryProvider({ children }) {
     getResult();
   }, [type]);
 
-  const values = { categoryList,setCategoryId,categoryId };
+  useEffect(() => {
+    const getResult = async () => {
+      try {
+        const getList = await axios.get(
+          `${TMDB_BASE_URL}/discover/${
+            type ? "tv" : "movie"
+          }?with_genres=${categoryId}&api_key=${
+            process.env.REACT_APP_TMDB_API_KEY
+          }&page=1`
+        );
+        setCategoryContent(getList.data.results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getResult();
+  }, [categoryId, type]);
+
+  useEffect(() => {
+      console.log(categoryContent);
+
+  }, [categoryContent]);
+
+  const values = { categoryList, setCategoryId, categoryId, categoryContent };
 
   return (
     <CategoryContext.Provider value={values}>
