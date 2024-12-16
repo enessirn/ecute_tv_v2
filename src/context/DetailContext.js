@@ -14,32 +14,33 @@ export function DetailProvider({ children }) {
   const API_URL = process.env.REACT_APP_OMDB_URL;
   const API_KEY = process.env.REACT_APP_OMBDB_KEY;
 
-  const options = {
-    method: "GET",
-    url: `https://youtube-data-api6.p.rapidapi.com/${heading && heading}+official+trailer+watch`,
-    headers: {
-      "X-RapidAPI-Key": `${process.env.REACT_APP_YOUTUBE_KEY}`,
-      "X-RapidAPI-Host": `${process.env.REACT_APP_YOUTUBE_HOST}`,
-    },
-  };
 
   useEffect(() => {
     const getResult = async () => {
       try {
-        const getData = await axios.request(options);
-        setVideoID(getData?.data && getData.data[0].id);
+        const getData = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+          params: {
+            part: 'id,snippet',
+            q: `${heading && heading} trailer watch`,
+            maxResults: 1,
+            key: process.env.REACT_APP_YOUTUBE_KEY,
+          }
+        });
+        setVideoID(getData && getData.data.items[0]?.id.videoId)
+        console.log(getData && getData.data.items[0]?.id.videoId, "getDAtaatatata");
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching data:", error);
       }
     };
     getResult();
-  }, [heading,type]);
+  }, [heading, type]);
+  
 
-  useEffect(() => {
-    if (videoID) {
-      console.log(videoID);
-    }
-  }, [videoID]);
+  // useEffect(() => {
+  //   if (videoID) {
+  //     console.log(videoID);
+  //   }
+  // }, [videoID]);
 
     useEffect(() => {
     const getPopularDetail = async () => {

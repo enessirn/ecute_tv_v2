@@ -21,7 +21,7 @@ function Carousel() {
             key={index}
             src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
             className={`${
-              dataIndex === index ? "brightness-100 shadow-[0px_0px_40px_10px_rgba(255,0,0,0.45)] animate-pulse" : "brightness-50"
+              dataIndex === index ? "brightness-100 !shadow-[0px_0px_40px_10px_rgba(255,0,0,0.45)] animate-pulse saturate-100" : "saturate-[0.25] brightness-50"
             } rounded-xl shadow-md w-[50%] min-[1300px]:w-[100%] h-24 object-cover  hover:brightness-100 hover:shadow-[0px_0px_40px_10px_rgba(255,0,0,0.45)] transition-all cursor-pointer`}
             alt={`${type ? item && item.name : item && item.title}`}
             tabIndex={index}
