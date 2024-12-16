@@ -1,60 +1,66 @@
 import React, { useContext } from "react";
 import DetailContext from "../../context/DetailContext";
 import PopularListContext from "../../context/PopularList";
-import LocalStorageContext from "../../context/LocalStorage"
+import LocalStorageContext from "../../context/LocalStorage";
+import PopularDetailContext from "../../context/PopularDetail";
 function ButtonGroup() {
-  const {setClose} = useContext(DetailContext);
+  const { setClose } = useContext(DetailContext);
   const IMAGE_URL = "https://image.tmdb.org/t/p/original";
-  const { result,dataIndex,type } = useContext(PopularListContext);
+  const { result, dataIndex, type } = useContext(PopularListContext);
+  const { setHeading } = useContext(PopularDetailContext);
   const { setLocalItems, localItems } = useContext(LocalStorageContext);
   const checkFavorite = () => {
-    const findData = localItems.find(el => {
-      if (el.title === result[dataIndex]?.name || el.title === result[dataIndex]?.title) {
-        return true
-      }
-      else {
+    const findData = localItems.find((el) => {
+      if (
+        el.title === result[dataIndex]?.name ||
+        el.title === result[dataIndex]?.title
+      ) {
+        return true;
+      } else {
         return false;
       }
-    })
-    return findData
-  }
+    });
+    return findData;
+  };
   const addFavorite = () => {
-    const findData = checkFavorite()
+    const findData = checkFavorite();
     if (!findData) {
-     setLocalItems([
-       ...localItems,
-       {
-         id: Number(localItems.length),
-         img: `${IMAGE_URL}${result && result[dataIndex]?.poster_path}`,
-         title: `${result && type ? result[dataIndex]?.name : result[dataIndex]?.title}`,
-       },
-     ]);
-    }
-    else {
+      setLocalItems([
+        ...localItems,
+        {
+          id: Number(localItems.length),
+          img: `${IMAGE_URL}${result && result[dataIndex]?.poster_path}`,
+          title: `${
+            result && type ? result[dataIndex]?.name : result[dataIndex]?.title
+          }`,
+        },
+      ]);
+    } else {
       setLocalItems(
-        localItems.filter(
-          (element) => {
-            if (type) {
-              return element.title !== result[dataIndex].name
-            }
-            else {
-              return element.title !== result[dataIndex].title
-            }
+        localItems.filter((element) => {
+          if (type) {
+            return element.title !== result[dataIndex].name;
+          } else {
+            return element.title !== result[dataIndex].title;
           }
-        )
-      )
+        })
+      );
     }
- 
-   };
+  };
   return (
     <div className="flex flex-row gap-2">
-      <button className="flex flex-row items-center text-sm bg-[#383838] px-3 py-3 min-[1300px]:px-12 min-[1300px]:py-6 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#4b4b4b" onClick={addFavorite}>
+      <button
+        className="flex flex-row items-center text-sm bg-[#383838] px-3 py-3 min-[1300px]:px-12 min-[1300px]:py-6 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#4b4b4b"
+        onClick={addFavorite}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className={`size-6 pointer-events-none ${checkFavorite() && 'fill-primary !stroke-none'}`} 
+          className={`size-6 pointer-events-none ${
+            checkFavorite() && "fill-primary !stroke-none"
+          }`}
         >
           <path
             strokeLinecap="round"
@@ -64,7 +70,12 @@ function ButtonGroup() {
         </svg>
         <span className="hidden md:!block">Add to favorites</span>
       </button>
-      <button className="flex flex-row items-center text-sm bg-[#c8143b] px-6 py-3 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#e43232]" onClick={() => setClose(false)}>
+      <button
+        className="flex flex-row items-center text-sm bg-[#c8143b] px-6 py-3 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#e43232]"
+        onClick={() => {
+          setClose(false);
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
