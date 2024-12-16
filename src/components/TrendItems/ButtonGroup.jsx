@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import DetailContext from "../../context/DetailContext";
-import PopularDetailContext from "../../context/PopularDetail";
 import PopularListContext from "../../context/PopularList";
 import LocalStorageContext from "../../context/LocalStorage"
 function ButtonGroup() {
@@ -8,16 +7,19 @@ function ButtonGroup() {
   const IMAGE_URL = "https://image.tmdb.org/t/p/original";
   const { result,dataIndex,type } = useContext(PopularListContext);
   const { setLocalItems, localItems } = useContext(LocalStorageContext);
-  const addFavorite = () => {
+  const checkFavorite = () => {
     const findData = localItems.find(el => {
-      if (type) {
-        return el.title === result[dataIndex].name
+      if (el.title === result[dataIndex]?.name || el.title === result[dataIndex]?.title) {
+        return true
       }
       else {
-        return el.title === result[dataIndex].title
+        return false;
       }
-    });
-    console.log(findData,"findatatata ")
+    })
+    return findData
+  }
+  const addFavorite = () => {
+    const findData = checkFavorite()
     if (!findData) {
      setLocalItems([
        ...localItems,
@@ -28,6 +30,20 @@ function ButtonGroup() {
        },
      ]);
     }
+    else {
+      setLocalItems(
+        localItems.filter(
+          (element) => {
+            if (type) {
+              return element.title !== result[dataIndex].name
+            }
+            else {
+              return element.title !== result[dataIndex].title
+            }
+          }
+        )
+      )
+    }
  
    };
   return (
@@ -35,11 +51,10 @@ function ButtonGroup() {
       <button className="flex flex-row items-center text-sm bg-[#383838] px-3 py-3 min-[1300px]:px-12 min-[1300px]:py-6 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#4b4b4b" onClick={addFavorite}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-6 pointer-events-none"
+          className={`size-6 pointer-events-none ${checkFavorite() && 'fill-primary !stroke-none'}`} 
         >
           <path
             strokeLinecap="round"
@@ -47,7 +62,7 @@ function ButtonGroup() {
             d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
           />
         </svg>
-        <span className="hidden md:block">Add to favorites</span>
+        <span className="hidden md:!block">Add to favorites</span>
       </button>
       <button className="flex flex-row items-center text-sm bg-[#c8143b] px-6 py-3 rounded-xl gap-1 hover:shadow-2xl hover:bg-[#e43232]" onClick={() => setClose(false)}>
         <svg

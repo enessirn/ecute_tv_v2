@@ -7,23 +7,49 @@ import LocalStorageContext from "../../context/LocalStorage";
 function Detail() {
   const { setClose, desc, close } = useContext(DetailContext);
   const { setLocalItems, localItems } = useContext(LocalStorageContext);
-  const { type } = useContext(PopularListContext);
+  const IMAGE_URL = "https://image.tmdb.org/t/p/original";
+  const { result,dataIndex,type } = useContext(PopularListContext);
   const localTitle = createRef();
 
+  const checkFavorite = () => {
+    const findData = localItems.find(el => {
+      if (el.title === result[dataIndex]?.name || el.title === result[dataIndex]?.title) {
+        return true
+      }
+      else {
+        return false;
+      }
+    })
+    return findData
+  }
   const addFavorite = () => {
-   const findData = localItems.find(el => el.title === localTitle.current.textContent);
-   if (!findData) {
-    setLocalItems([
-      ...localItems,
-      {
-        id: Number(localItems.length),
-        img: `${desc && desc.Poster}`,
-        title: localTitle.current.textContent,
-      },
-    ]);
-   }
-
-  };
+    const findData = checkFavorite()
+    if (!findData) {
+     setLocalItems([
+       ...localItems,
+       {
+         id: Number(localItems.length),
+         img: `${IMAGE_URL}${result && result[dataIndex]?.poster_path}`,
+         title: `${result && type ? result[dataIndex]?.name : result[dataIndex]?.title}`,
+       },
+     ]);
+    }
+    else {
+      setLocalItems(
+        localItems.filter(
+          (element) => {
+            if (type) {
+              return element.title !== result[dataIndex].name
+            }
+            else {
+              return element.title !== result[dataIndex].title
+            }
+          }
+        )
+      )
+    }
+ 
+   };
 
   return close ? null : (
     <div className="w-full">
@@ -61,16 +87,15 @@ function Detail() {
                   {desc && desc.Title}
                 </span>
                 <button
-                  className="flex flex-row border border-white items-center justify-center text-sm w-[30px] h-[30px] min-[1300px]:text-base min-[1300px]:w-[50px] min-[1300px]:h-[50px] rounded-full"
+                  className="flex flex-row items-center justify-center text-sm w-[30px] h-[30px] min-[1300px]:text-base min-[1300px]:w-[50px] min-[1300px]:h-[50px] rounded-full"
                   onClick={addFavorite}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
                     viewBox="0 0 24 24"
-                    strokeWidth={1.5}
+                    strokeWidth={1}
                     stroke="currentColor"
-                    className="size-6"
+                    className={`${checkFavorite() && 'fill-primary !stroke-none'}`}
                   >
                     <path
                       strokeLinecap="round"

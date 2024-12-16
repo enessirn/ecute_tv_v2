@@ -91,11 +91,11 @@ function Header() {
                 }}
               >
                 <img
-                  className="w-14 h-14 rounded-full object-center select-none pointer-events-none"
+                  className="w-14 h-14 rounded-full object-center select-none"
                   src={`${item && item.img}`}
                   alt={`${item && item.title}`}
                 />
-                <span className="select-none overflow-hidden text-sm text-center pointer-events-none">
+                <span className="select-none overflow-hidden text-sm text-center">
                   {item && item.title}
                 </span>
                 <svg
@@ -105,12 +105,16 @@ function Header() {
                   strokeWidth={1.5}
                   stroke="currentColor"
                   className="size-6 min-w-[1.5rem]"
-                  onClick={() =>
+                  onClick={() => {
+                    setClose(false)
                     setLocalItems(
                       localItems.filter(
                         (element) => element.title !== item.title
                       )
                     )
+
+                  }
+                   
                   }
                 >
                   <path
