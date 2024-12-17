@@ -55,11 +55,6 @@ export function CategoryProvider({ children }) {
     getResult();
   }, [categoryId, type]);
 
-  useEffect(() => {
-      console.log(categoryContent);
-
-  }, [categoryContent]);
-
   const values = { categoryList, setCategoryId, categoryId, categoryContent };
 
   return (

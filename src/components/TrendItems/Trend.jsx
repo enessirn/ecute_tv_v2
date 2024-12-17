@@ -76,7 +76,7 @@ function Trend() {
               alt="IMDB"
             />
           </span>
-          <div className="mt-2 max-h-48 md:h-full overflow-hidden hover:overflow-y-auto md:!overflow-hidden text-sm lg:text-lg w-1/2 md:w-full flex-wrap text-wrap custom-scrollbar">
+          <div className="mt-2 max-h-32 md:max-h-48 md:h-full overflow-hidden hover:overflow-y-auto md:!overflow-hidden text-sm lg:text-lg w-1/2 md:w-full flex-wrap text-wrap custom-scrollbar">
           {result ? result[dataIndex]?.overview : <div className="animate-pulse rounded-full bg-black-700 h-10 w-10"></div> }
           </div>
 
