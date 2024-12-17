@@ -81,7 +81,7 @@ function Detail() {
             <div className="detail-header text-white absolute z-50 top-[55%] left-5 flex flex-col ">
               <div className="flex flex-row px-4 ml-2 !select-text py-2 gap-2">
                 <span
-                  className="text-3xl min-[1300px]:text-5xl  uppercase font-extrabold !cursor-default"
+                  className="text-xl min-[1300px]:text-5xl  uppercase font-extrabold !cursor-default"
                   ref={localTitle}
                 >
                   {desc && desc.Title}
@@ -133,7 +133,7 @@ function Detail() {
               </span>
             </div>
 
-            <div className="detail-header w-[30%] text-white absolute top-[55%] right-5 flex flex-col p-0 min-[1300px]:p-4 py-2">
+            <div className="overflow-hidden detail-header w-[30%] text-white absolute top-[55%] right-5 flex flex-col p-0 min-[1300px]:p-4 py-2">
               <div className="flex flex-col text-sm min-[1300px]:text-base min-[1300px]:flex-row gap-1 min-[1300px]:gap-2">
                 <span className="text-gray-400">Writer:</span>
                 <span className="text-gray-300">

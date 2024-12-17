@@ -13,7 +13,7 @@ function Carousel() {
 
   return (
     <div
-      className={`absolute top-1/4 right-0 md:right-5 flex flex-col gap-2 items-end`}
+      className={`absolute top-[15%] md:top-1/4 right-0 md:right-5 flex flex-col gap-2 items-end`}
     >
       {loading && result?.length > 0 ? (
         result.map((item, index) => (
