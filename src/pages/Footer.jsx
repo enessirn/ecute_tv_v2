@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
   return (
     <div
-      className="absolute z-50 h-80 cursor-pointer text-white font-semibold bg-black text-lg w-full flex justify-center items-center overflow-hidden"
+      className="absolute z-50 cursor-pointer text-white font-semibold bg-black text-lg w-full flex justify-center items-center overflow-hidden"
       onClick={() =>
         window.open("https://www.linkedin.com/in/enessirn/", "_blank")
       }
