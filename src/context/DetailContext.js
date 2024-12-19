@@ -16,7 +16,7 @@ export function DetailProvider({ children }) {
 
 
   useEffect(() => {
-    if (close === false) {
+    if (!close) {
       const getResult = async () => {
         try {
           const getData = await axios.get('https://www.googleapis.com/youtube/v3/search', {
@@ -38,15 +38,15 @@ export function DetailProvider({ children }) {
   
 
   useEffect(() => {
-    if (videoID) {
+    if (!close) {
       console.log(videoID);
     }
-  }, [videoID]);
+  }, [videoID,close]);
 
     useEffect(() => {
     const getPopularDetail = async () => {
       try {
-        if (heading) {
+        if (heading && !close) {
           const getResult = await axios.get(
             `${API_URL}${API_KEY}t=${heading}&r=json`
           );
@@ -62,7 +62,7 @@ export function DetailProvider({ children }) {
     };
 
     getPopularDetail();
-  }, [heading]);
+  }, [heading,close]);
   const values = { setClose, close,videoID,desc,load };
   return (
     <DetailContext.Provider value={values}>{children}</DetailContext.Provider>
