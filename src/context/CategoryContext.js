@@ -58,4 +58,4 @@ export function CategoryProvider({ children }) {
   );
 }
 
-export default React.memoCategoryContext;
+export default CategoryContext;
