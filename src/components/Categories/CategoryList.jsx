@@ -31,4 +31,4 @@ function CategoryList() {
   );
 }
 
-export default React.memo(CategoryList);
+export default CategoryList;
