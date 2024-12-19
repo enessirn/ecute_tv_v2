@@ -26,5 +26,5 @@ Başlangıçta Vanilla JS ile oluşturduğum Ecutetv sitesini, şimdi ReactJS il
 
 Siteme göz atmak isterseniz bu linkten ulaşabilirsiniz.
 
-https://superlative-gingersnap-ab52fd.netlify.app/
+<a>https://ecute-tv-v2-m4mr4roqz-enessirns-projects.vercel.app/</a>
 
