@@ -37,12 +37,6 @@ export function DetailProvider({ children }) {
   }, [heading, type,close]);
   
 
-  useEffect(() => {
-    if (!close) {
-      console.log(videoID);
-    }
-  }, [videoID,close]);
-
     useEffect(() => {
     const getPopularDetail = async () => {
       try {
