@@ -15,17 +15,8 @@ function YouTubeIframe() {
         allow="autoplay"
         title={heading}
       ></iframe>
-    // ) : (
-    //   <>
-    //     <img
-    //       className="w-full h-[55%] object-contain object-center"
-    //       src={desc.Poster}
-    //       alt={heading}
-    //     />
-    //   </>
-    // )
   );
   
 }
 
-export default YouTubeIframe
+export default React.memo(YouTubeIframe);
