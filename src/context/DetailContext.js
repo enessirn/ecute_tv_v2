@@ -16,7 +16,7 @@ export function DetailProvider({ children }) {
 
 
   useEffect(() => {
-    if (close) {
+    if (close === false) {
       const getResult = async () => {
         try {
           const getData = await axios.get('https://www.googleapis.com/youtube/v3/search', {
