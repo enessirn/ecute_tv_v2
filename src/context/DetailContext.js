@@ -16,30 +16,32 @@ export function DetailProvider({ children }) {
 
 
   useEffect(() => {
-    const getResult = async () => {
-      try {
-        const getData = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-          params: {
-            part: 'id,snippet',
-            q: `${heading && heading} trailer watch`,
-            maxResults: 1,
-            key: process.env.REACT_APP_YOUTUBE_KEY,
-          }
-        });
-        setVideoID(getData && getData.data.items[0]?.id.videoId)
-      } catch (error) {
-        console.error("Error fetching data:", error);
+    if (close) {
+      const getResult = async () => {
+        try {
+          const getData = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+            params: {
+              part: 'id,snippet',
+              q: `${heading && heading} official trailer watch`,
+              maxResults: 1,
+              key: process.env.REACT_APP_YOUTUBE_KEY,
+            }
+          });
+          setVideoID(getData && getData.data.items[0]?.id.videoId)
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
       }
-    };
-    getResult();
-  }, [heading, type]);
+      getResult();
+    }
+  }, [heading, type,close]);
   
 
-  // useEffect(() => {
-  //   if (videoID) {
-  //     console.log(videoID);
-  //   }
-  // }, [videoID]);
+  useEffect(() => {
+    if (videoID) {
+      console.log(videoID);
+    }
+  }, [videoID]);
 
     useEffect(() => {
     const getPopularDetail = async () => {

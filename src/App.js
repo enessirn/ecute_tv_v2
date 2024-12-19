@@ -16,22 +16,6 @@ function App() {
     window.addEventListener("scroll",handleScroll);
     
   },[])
-  // useEffect(() => {
-  //   console.log(scrollValue)
-  // },[scrollValue])
-  
-  
-
-  // useEffect(() => {
-  //   console.log(close,"close değeri")
-  //   if (close === true) {
-  //     setTimeout(() => {
-  //       window.scrollTo(0,scrollValue);
-  //     }, 500);
-
-  //   }
-  // },[close])
-
   return (
     <div className="main font-poppins scroll-smooth bg-black">
       <TrendItems />
