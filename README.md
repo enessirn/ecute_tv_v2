@@ -26,5 +26,5 @@ Başlangıçta Vanilla JS ile oluşturduğum Ecutetv sitesini, şimdi ReactJS il
 
 Siteme göz atmak isterseniz bu linkten ulaşabilirsiniz.
 
-<a>https://ecute-tv-v2-m4mr4roqz-enessirns-projects.vercel.app/</a>
+<a>https://ecute-tv-v2.vercel.app/</a>
 
