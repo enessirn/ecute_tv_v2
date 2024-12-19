@@ -40,7 +40,7 @@ export function CategoryProvider({ children }) {
   useEffect(() => {
     const getResult = async () => {
       try {
-        const getList = await axios.get(`${TMDB_BASE_URL}/discover/${type ? "tv" : "movie"}?with_genres=${categoryId}&api_key=${process.env.REACT_APP_TMDB_API_KEY}&page=1`,options);
+        const getList = await axios.get(`${TMDB_BASE_URL}/discover/${type ? "tv" : "movie"}?with_genres=${categoryId}&api_key=${process.env.REACT_APP_TDB_API_KEY}&page=1`);
         setCategoryContent(getList.data.results);
       } catch (error) {
         console.error(error);
